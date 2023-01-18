@@ -29,8 +29,8 @@ export const ContactForm = (
 
     // const dataForm = { name, number };
     const dataForm = e.target;
-
-
+    console.log(dataForm);
+    
     // onSubmit(dataForm);
     dataForm.reset();
   };
