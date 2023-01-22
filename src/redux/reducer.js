@@ -1,5 +1,3 @@
-import { combineReducers } from 'redux';
-
 const contactsInitialState = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
   { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -7,7 +5,7 @@ const contactsInitialState = [
   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
 ];
 
-const contactsReducer = (state = contactsInitialState, action) => {
+export const contactsReducer = (state = contactsInitialState, action) => {
   switch (action.type) {
     case 'contacts/addContact':
       return [...state, action.payload];
@@ -20,7 +18,7 @@ const contactsReducer = (state = contactsInitialState, action) => {
 
 const filterInitialState = '';
 
-const filterReducer = (state = filterInitialState, action) => {
+export const filterReducer = (state = filterInitialState, action) => {
   switch (action.type) {
     case 'filter/setChangesFilter':
           return action.payload;
@@ -28,8 +26,3 @@ const filterReducer = (state = filterInitialState, action) => {
       return state;
   }
 };
-
-export const rootReducer = combineReducers({
-  contacts: contactsReducer,
-  filter: filterReducer,
-});
