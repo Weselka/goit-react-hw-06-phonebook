@@ -1,4 +1,7 @@
-import { combineReducers } from 'redux';
+// import { combineReducers } from 'redux';
+import { createReducer } from '@reduxjs/toolkit';
+import { addContact, deleteContact, setChangesFilter } from './actions';
+
 
 const contactsInitialState = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -7,29 +10,28 @@ const contactsInitialState = [
   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
 ];
 
-export const contactsReducer = (state = contactsInitialState, action) => {
-  switch (action.type) {
-    case 'contacts/addContact':
-      return [...state, action.payload];
-    case 'contacts/deleteContact':
-      return state.filter(contact => contact.id !== action.payload);
-    default:
-      return state;
-  }
-};
+export const contactsReducer = createReducer(contactsInitialState, {
+    [addContact]: (state, action) => {
+        state.push(action.payload);
+    // return [...state, action.payload];
+  },
+  [deleteContact]: (state, action) => {
+    // return state.filter(contact => contact.id !== action.payload);
+      const index = state.findIndex(contact => contact.id === action.payload);
+      state.splice(index, 1);
+  },
+});
 
 const filterInitialState = '';
 
-export const filterReducer = (state = filterInitialState, action) => {
-  switch (action.type) {
-    case 'filter/setChangesFilter':
-          return action.payload;
-    default:
-      return state;
-  }
-};
-
-export const rootReducer = combineReducers({
-  contacts: contactsReducer,
-  filter: filterReducer,
+export const filterReducer = createReducer(filterInitialState, {
+    [setChangesFilter]: (state, action) => {
+    //   state = action.payload;
+      return action.payload;
+    },
 });
+
+// export const rootReducer = combineReducers({
+//   contacts: contactsReducer,
+//   filter: filterReducer,
+// });
