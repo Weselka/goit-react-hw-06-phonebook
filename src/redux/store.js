@@ -1,6 +1,5 @@
 import { createStore } from 'redux';
 import { devToolsEnhancer } from '@redux-devtools/extension';
-import { dataForm } from './constants';
 // Початкове значення стану Redux для кореневого редюсера,
 // якщо не передати параметр preloadedState.
 const configureStore = {
@@ -10,10 +9,7 @@ const configureStore = {
     { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
     { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
   ],
-  filter: {
-    name: dataForm.name,
-    number: dataForm.number,
-  },
+  filter: '',
 };
 // Поки що використовуємо редюсер який
 // тільки повертає отриманий стан
