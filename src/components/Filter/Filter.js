@@ -3,7 +3,7 @@
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getFilter } from '../../redux/selectors';
-import { setChangesFilter } from '../../redux/actions';
+import { setChangesFilter } from '../../redux/filterSlice';
 import { FilterBox, Label, Input } from './Filter.styled';
 
 export const Filter = () => {

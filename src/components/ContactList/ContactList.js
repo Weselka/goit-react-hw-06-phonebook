@@ -14,7 +14,6 @@ const getVisibleContacts = (items, filter) => {
 export const ContactList = () => {
   const items = useSelector(getContacts);
   const filter = useSelector(getFilter);
-  console.log(filter);
   const visibleContacts = getVisibleContacts(items, filter);
 
   return (
