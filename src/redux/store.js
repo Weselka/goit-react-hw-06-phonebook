@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';import { contactsReducer, filt
 
 export const store = configureStore({
   reducer: {
-    tasks: contactsReducer,
-    filters: filterReducer,
+    contacts: contactsReducer,
+    filter: filterReducer,
   },
 });
