@@ -18,13 +18,6 @@ export const deleteContact = contactId => {
   };
 };
 
-// export const toggleCompleted = taskId => {
-//   return {
-//     type: 'tasks/toggleCompleted',
-//     payload: taskId,
-//   };
-// };
-
 export const setChangesFilter = value => {
   return {
     type: 'filter/setChangesFilter',
