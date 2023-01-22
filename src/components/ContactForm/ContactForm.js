@@ -2,30 +2,27 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { getFilter } from '../../redux/selectors';
+import { getContacts } from '../../redux/selectors';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../redux/actions';
+
 import { Label, Form, Input, Button } from './ContactForm.styled';
 
-export const ContactForm = () =>
-  // { onSubmit }
-  {
-    const filter = useSelector(getFilter);
-    console.log(filter);
-    // const [name, setName] = useState('');
-    // const [number, setNumber] = useState('');
+export const ContactForm = () => {
+  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
 
     const handleChange = e => {
       const { name, value } = e.target;
 
       switch (name) {
         case 'name':
-          // setName(value);
-          filter.name = value;
-          console.log(filter);
+          contacts.name = value;
+          console.log(contacts);
           break;
         case 'number':
-          // setNumber(value);
-          filter.number = value;
-          console.log(filter);
+          contacts.number = value;
+          console.log(contacts);
           break;
         default:
           return Notify.warning(`${name} or ${value} entered incorrectly.`);
@@ -34,11 +31,8 @@ export const ContactForm = () =>
 
     const handleSubmit = e => {
       e.preventDefault();
-      console.log(filter);
-      // const dataForm = { name, number };
-      const dataForm = e.currentTarget;
-
-      // onSubmit(dataForm);
+      const dataForm = e.target;
+      dispatch(addContact(dataForm.elements));
       dataForm.reset();
     };
 
@@ -47,7 +41,7 @@ export const ContactForm = () =>
         <Label>
           Name
           <Input
-            // value={filter.name.value}
+            // value={contacts.name.value}
             onChange={handleChange}
             type="text"
             name="name"
@@ -59,7 +53,7 @@ export const ContactForm = () =>
         <Label>
           Number
           <Input
-            // value={filter.number.value}
+            // value={contacts.number.value}
             onChange={handleChange}
             type="tel"
             name="number"

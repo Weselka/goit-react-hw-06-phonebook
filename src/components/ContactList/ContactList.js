@@ -4,19 +4,15 @@ import { getContacts } from '../../redux/selectors';
 import { Contact } from 'components';
 import { BoardContacts, ContactsItem } from './ContactList.styled';
 
-export const ContactList = (
-  // { items, onDelete }
-) => {
+export const ContactList = () => {
   const items = useSelector(getContacts);
-  console.log(items);
+
   return (
     <BoardContacts>
       {items.map(item => {
         return (
           <ContactsItem key={item.id}>
-            <Contact contact={item}
-              // onDelete={onDelete}
-            ></Contact>
+            <Contact contact={item}></Contact>
           </ContactsItem>
         );
       })}
