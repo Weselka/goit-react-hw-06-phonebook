@@ -5,11 +5,10 @@ import { Contact } from 'components';
 import { BoardContacts, ContactsItem } from './ContactList.styled';
 
 const getVisibleContacts = (contacts, filter) => {
-  console.log(contacts);
   const normalized = filter.toLowerCase();
-  return contacts.filter(contact =>
-    contact.name.toLowerCase().includes(normalized)
-  );
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalized)
+    );
 };
 
 export const ContactList = () => {
