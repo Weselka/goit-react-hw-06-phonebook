@@ -4,17 +4,18 @@ import { getContacts, getFilter } from '../../redux/selectors';
 import { Contact } from 'components';
 import { BoardContacts, ContactsItem } from './ContactList.styled';
 
-const getVisibleContacts = (items, filter) => {
+const getVisibleContacts = (contacts, filter) => {
+  console.log(contacts);
   const normalized = filter.toLowerCase();
-  return items.filter(contact =>
+  return contacts.filter(contact =>
     contact.name.toLowerCase().includes(normalized)
   );
 };
 
 export const ContactList = () => {
-  const items = useSelector(getContacts);
+  const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
-  const visibleContacts = getVisibleContacts(items, filter);
+  const visibleContacts = getVisibleContacts(contacts, filter);
 
   return (
     <BoardContacts>
