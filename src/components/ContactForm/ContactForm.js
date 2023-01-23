@@ -1,4 +1,4 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
@@ -9,6 +9,8 @@ import { addContact } from '../../redux/contactsSlice';
 import { Label, Form, Input, Button } from './ContactForm.styled';
 
 export const ContactForm = () => {
+  const [nameInput, setNameInput] = useState('');
+  const [numberInput, setNumberInput] = useState('');
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
@@ -16,37 +18,44 @@ export const ContactForm = () => {
     const { name, value } = e.target;
     switch (name) {
       case 'name':
-        contacts.name = value;
+        setNameInput(value);
         break;
       case 'number':
-        contacts.number = value;
+        setNumberInput(value);
         break;
       default:
         return Notify.warning(`${name} or ${value} entered incorrectly.`);
     }
   };
 
+  const clearStateInput = () => {
+    setNameInput('');
+    setNumberInput('');
+  }
+
   const handleSubmit = e => {
     e.preventDefault();
     const dataForm = e.target.elements;
+    const { name, number } = dataForm;
     const presence = contacts.some(
       contact => contact.name === dataForm.name.value
     );
     if (presence) {
       Notify.warning(`${dataForm.name.value} is already in contacts.`);
       e.target.reset();
+      clearStateInput();
       return;
     }
-    dispatch(addContact(dataForm));
+    dispatch(addContact(name, number));
     e.target.reset();
+    clearStateInput();
   };
-  const { name, number } = contacts;
   return (
     <Form onSubmit={handleSubmit}>
       <Label>
         Name
         <Input
-          value={name}
+          value={nameInput}
           onChange={handleChange}
           type="text"
           name="name"
@@ -58,7 +67,7 @@ export const ContactForm = () => {
       <Label>
         Number
         <Input
-          value={number}
+          value={numberInput}
           onChange={handleChange}
           type="tel"
           name="number"
